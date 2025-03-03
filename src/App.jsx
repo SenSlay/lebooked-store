@@ -1,7 +1,16 @@
+import { Outlet } from "react-router-dom"
+import Header from "./components/Header"
+import Footer from "./components/Footer";
+import { BooksProvider } from "./BooksContext";
+
 function App() {
   return (
     <>
-      <button className="text-6xl font-bold text-blue-600">LEBOOKED</button>
+      <Header></Header>
+      <BooksProvider>
+        <Outlet></Outlet>
+      </BooksProvider>
+      <Footer></Footer>
     </>
   );
 }
