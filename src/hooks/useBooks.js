@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
 
 const fetchBookImage = async (title, author) => {
   try {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(title)}+inauthor:${encodeURIComponent(author)}`
+      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(title)}+inauthor:${encodeURIComponent(author)}&key=${API_KEY}`
     );
     const data = await response.json();
 
