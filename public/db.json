@@ -1,0 +1,139 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "description": "A guide on building good habits and breaking bad ones with practical strategies.",
+      "price": 18.99,
+      "genres": ["Self-Help", "Psychology"],
+      "tags": ["Bestseller", "Trending", "Highly Rated"]
+    },
+    {
+      "id": 2,
+      "title": "The Midnight Library",
+      "author": "Matt Haig",
+      "description": "A novel exploring infinite possibilities and the choices that define us.",
+      "price": 14.99,
+      "genres": ["Fiction", "Fantasy"],
+      "tags": ["Popular", "Award-Winning", "Book Club Favorite", "Trending"]
+    },
+    {
+      "id": 3,
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "description": "A sci-fi classic set in a distant future of interstellar politics and mysticism.",
+      "price": 21.99,
+      "genres": ["Science Fiction", "Fantasy"],
+      "tags": ["Classic", "Movie Adaptation", "Fan Favorite"]
+    },
+    {
+      "id": 4,
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "description": "A philosophical novel about following one's dreams and personal legend.",
+      "price": 12.99,
+      "genres": ["Fiction", "Philosophy"],
+      "tags": ["Inspirational", "Bestseller", "Life-Changing"]
+    },
+    {
+      "id": 5,
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "description": "A timeless novel about racial injustice and moral growth in the Deep South.",
+      "price": 16.50,
+      "genres": ["Fiction", "Classic"],
+      "tags": ["Classic", "Award-Winning", "Highly Rated", "Trending"]
+    },
+    {
+      "id": 6,
+      "title": "1984",
+      "author": "George Orwell",
+      "description": "A dystopian novel exploring totalitarianism, surveillance, and freedom.",
+      "price": 10.99,
+      "genres": ["Science Fiction", "Dystopian"],
+      "tags": ["Classic", "Bestseller", "Thought-Provoking"]
+    },
+    {
+      "id": 7,
+      "title": "The Subtle Art of Not Giving a F*ck",
+      "author": "Mark Manson",
+      "description": "A counterintuitive approach to living a good life by focusing on what truly matters.",
+      "price": 19.99,
+      "genres": ["Self-Help", "Psychology"],
+      "tags": ["Bestseller", "Practical Advice"]
+    },
+    {
+      "id": 8,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "description": "A fantasy adventure that sets the stage for The Lord of the Rings.",
+      "price": 15.75,
+      "genres": ["Fantasy", "Adventure"],
+      "tags": ["Classic", "Fan Favorite", "Highly Rated"]
+    },
+    {
+      "id": 9,
+      "title": "Becoming",
+      "author": "Michelle Obama",
+      "description": "A memoir from the former First Lady of the United States, reflecting on her journey.",
+      "price": 22.50,
+      "genres": ["Memoir", "Biography"],
+      "tags": ["Inspirational", "Bestseller", "Award-Winning"]
+    },
+    {
+      "id": 10,
+      "title": "The Psychology of Money",
+      "author": "Morgan Housel",
+      "description": "Timeless lessons on wealth, greed, and financial behavior.",
+      "price": 17.99,
+      "genres": ["Finance", "Self-Help"],
+      "tags": ["Trending", "Bestseller", "Highly Rated"]
+    },
+    {
+      "id": 11,
+      "title": "Circe",
+      "author": "Madeline Miller",
+      "description": "A feminist retelling of the story of Circe, the witch from Greek mythology.",
+      "price": 18.25,
+      "genres": ["Fiction", "Mythology"],
+      "tags": ["Popular", "Award-Winning", "Book Club Favorite", "Trending"]
+    },
+    {
+      "id": 12,
+      "title": "Educated",
+      "author": "Tara Westover",
+      "description": "A memoir of a woman who grew up without formal education and found her way to success.",
+      "price": 13.99,
+      "genres": ["Memoir", "Inspirational"],
+      "tags": ["Bestseller", "Highly Rated", "Life-Changing"]
+    },
+    {
+      "id": 13,
+      "title": "A Man Called Ove",
+      "author": "Fredrik Backman",
+      "description": "A heartwarming story of an old curmudgeon whose life is changed by his neighbors.",
+      "price": 14.50,
+      "genres": ["Fiction", "Contemporary"],
+      "tags": ["Heartfelt", "Bestseller", "Fan Favorite"]
+    },
+    {
+      "id": 14,
+      "title": "It Ends With Us",
+      "author": "Colleen Hoover",
+      "description": "A novel exploring love, resilience, and difficult choices in relationships.",
+      "price": 16.99,
+      "genres": ["Romance", "Drama"],
+      "tags": ["Trending", "Bestseller", "Emotional"]
+    },
+    {
+      "id": 15,
+      "title": "The Seven Husbands of Evelyn Hugo",
+      "author": "Taylor Jenkins Reid",
+      "description": "A historical fiction novel about a reclusive Hollywood icon’s life story.",
+      "price": 18.99,
+      "genres": ["Fiction", "Historical"],
+      "tags": ["Popular", "Highly Rated", "Book Club Favorite"]
+    }
+  ]
+}
