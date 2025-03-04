@@ -1,17 +1,18 @@
 import { Outlet } from "react-router-dom"
 import Header from "./components/Header"
 import Footer from "./components/Footer";
-import { BooksProvider } from "./BooksContext";
+import { BooksProvider } from "./context/BooksContext";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
-    <>
-      <Header></Header>
+    <CartProvider>
+      <Header />
       <BooksProvider>
-        <Outlet></Outlet>
+        <Outlet />
       </BooksProvider>
-      <Footer></Footer>
-    </>
+      <Footer />
+    </CartProvider>
   );
 }
 
