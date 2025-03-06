@@ -13,7 +13,7 @@ function BookCard({ book }) {
 
   return (
     <Link to={`/books/${book.id}`}>
-        <div className="flex flex-col w-[200px] lg:w-[250px] min-h-[450px] text-wrap p-4 bg-slate-200 rounded">
+        <div className="flex flex-col w-[200px] lg:w-[241px] min-h-[450px] text-wrap p-4 bg-slate-200 rounded">
             <img src={book.image} alt="" className="bg-white w-[180px] h-[250px] px-2 self-center mb-2"/>
             <h2 className="text-lg font-semibold">{book.title}</h2>
             <h3 className="mb-auto text-gray-700">{book.author}</h3>
