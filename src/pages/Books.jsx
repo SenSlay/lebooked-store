@@ -1,7 +1,8 @@
 import { BooksContext } from "../context/BooksContext";
 import { useContext, useState, useEffect } from "react";
-import BookCard from "../components/BookCard";
+import BookCard from "../components/common/BookCard";
 import FilterSection from "../components/booksPage/FilterSection";
+import { useSearchParams } from "react-router-dom";
 
 function Books() {
   const { books } = useContext(BooksContext)
@@ -11,6 +12,18 @@ function Books() {
     genres: [],
     tags: []
   });
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category"); // Get category from URL
+
+  // Set genre filter based from URL
+  useEffect(() => {
+    if (category) {
+      setFilters((prev) => ({
+        ...prev,
+        genres: [category.toLowerCase()], 
+      }));
+    }
+  }, [category]);
 
   useEffect(() => {
     let updatedBooks = books;
@@ -101,7 +114,6 @@ function Books() {
             <FilterSection
               title="Tags"
               options={[
-                { value: "Classic", label: "Classic" },
                 { value: "Bestseller", label: "Bestseller" },
                 { value: "Trending", label: "Trending" },
                 { value: "Movie Adaptation", label: "Movie Adaptation" },
@@ -115,6 +127,7 @@ function Books() {
             <FilterSection
               title="Genres"
               options={[
+                { value: "Classic", label: "Classic" },
                 { value: "Fiction", label: "Fiction" },
                 { value: "Pyschology", label: "Pyschology" },
                 { value: "Self-help", label: "Self-help" },
