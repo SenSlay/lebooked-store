@@ -11,7 +11,9 @@ function App() {
       <ModalProvider>
         <Header />
         <BooksProvider>
-          <Outlet />
+          <main className="flex-grow flex flex-col">
+            <Outlet />
+          </main>
         </BooksProvider>
         <Footer />
       </ModalProvider>
