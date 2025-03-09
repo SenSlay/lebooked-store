@@ -15,7 +15,7 @@ function Home() {
   const trending = books.filter(book => book.tags.includes("Trending"));
 
   return (
-    <main className="h-full">
+    <>
         <div className="relative bg-[url('../images/hero.jpg')] bg-no-repeat bg-cover bg-center before:absolute before:inset-0 before:bg-black/60 h-[650px] flex justify-center items-center ">
           <div className="relative z-10 p-6 text-white text-center min-w-[60%] flex flex-col items-center">
             <h1 className="font-bold text-7xl text-blue-500 mb-3">LeBooked</h1>
@@ -26,7 +26,7 @@ function Home() {
           </div>
         </div>
         <HomeSection title="Popular Categories">
-          <PopularCategories titles={['Self-Help', 'Romance', 'Science-Fiction', 'Classics']}></PopularCategories>
+          <PopularCategories titles={['Self-Help', 'Romance', 'Science Fiction', 'Classic']}></PopularCategories>
         </HomeSection>
       
         <HomeSection title="What's Trending">
@@ -36,7 +36,7 @@ function Home() {
         <HomeSection title="Bestsellers">
           {loading ? <p>Loading...</p> : <Carousel books={bestsellers} />}
         </HomeSection>
-      </main>
+      </>
   );
 }
 
