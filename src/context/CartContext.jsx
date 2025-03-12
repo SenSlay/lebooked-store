@@ -5,14 +5,13 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
   
-  const addToCart = (book) => {
+  const addToCart = (book, quantity = 1) => {
     setCart((prevCart) => {
-      console.log('test')
       const newCart = { ...prevCart };
       if (newCart[book.id]) {
-        newCart[book.id].quantity += 1; // Increase quantity if book exists
+        newCart[book.id].quantity += quantity; // Add the specified quantity
       } else {
-        newCart[book.id] = { ...book, quantity: 1 }; // Add new book
+        newCart[book.id] = { ...book, quantity }; // Add new book with given quantity
       }
       return newCart;
     });
