@@ -1,36 +1,38 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useCallback } from "react";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
   
-  const addToCart = (book, quantity = 1) => {
+  // Updates quantity (increases or decreases)
+  const updateCartQuantity = useCallback((book, newQuantity, isAdding = false) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
+  
       if (newCart[book.id]) {
-        newCart[book.id].quantity += quantity; // Add the specified quantity
+        newCart[book.id].quantity = isAdding
+          ? newCart[book.id].quantity + newQuantity
+          : Math.max(1, newQuantity);
       } else {
-        newCart[book.id] = { ...book, quantity }; // Add new book with given quantity
+        newCart[book.id] = { ...book, quantity: newQuantity };
       }
-      return newCart;
+  
+      return { ...newCart };
     });
-  };
+  }, [setCart]);
 
+  // Remove item from cart
   const removeFromCart = (id) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
-      if (newCart[id].quantity > 1) {
-        newCart[id].quantity -= 1; // Decrease quantity if more than 1
-      } else {
-        delete newCart[id]; // Remove book if quantity reaches 0
-      }
+      delete newCart[id];
       return newCart;
     });
   };
   
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, updateCartQuantity, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );
