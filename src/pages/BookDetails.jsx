@@ -1,17 +1,19 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useContext, useState } from "react";
 import { BooksContext } from "../context/BooksContext";
 import QuantitySelector from "../components/common/QuantitySelector";
 import { useCart } from "../context/CartContext";
 import { useModal } from "../context/ModalContext";
+import { useNavigate } from "react-router-dom";
 
 const BookDetails = () => {
   const { id } = useParams();
   const { books } = useContext(BooksContext);
   const [quantity, setQuantity] = useState(1);
-  const { updateCartQuantity } = useCart();
+  const { updateCartQuantity, cart } = useCart();
   const { showModal } = useModal();
   const [ error, setError ] = useState(null);
+  const navigate = useNavigate();
 
   const book = books.find((b) => b.id.toString() === id);
 
@@ -23,6 +25,24 @@ const BookDetails = () => {
     setError(null);
     updateCartQuantity(book, quantity, true);
     showModal(`Book added to your cart`);
+  };
+
+  const handleBuyNow = () => {
+    if (quantity === 0) {
+      setError("Quantity must be at least 1.");
+      return;
+    }
+    setError(null);
+  
+    const existingCartItem = cart.find((item) => item.id === book.id);
+
+    if (!existingCartItem) {
+      // Add to cart only if not already present
+      updateCartQuantity(book, quantity, true); 
+    }
+  
+    // Redirect to Shopping Cart page
+    navigate("/cart");
   };
 
   if (!book) {
@@ -50,7 +70,12 @@ const BookDetails = () => {
               </svg>
               Add To Cart
             </button>
-            <Link to="/cart" className="py-2 w-[220px] text-center flex items-center justify-center font-medium rounded bg-blue-600 text-white hover:bg-blue-700">Buy Now</Link>
+            <button 
+              onClick={handleBuyNow} 
+              className="py-2 w-[220px] text-center flex items-center justify-center font-medium rounded bg-blue-600 text-white hover:bg-blue-700"
+            >
+              Buy Now
+            </button>
           </div>
         </div>
       </div>
