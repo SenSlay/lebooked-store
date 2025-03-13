@@ -3,34 +3,30 @@ import { createContext, useState, useContext, useCallback } from "react";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState({});
-  
-  // Updates quantity (increases or decreases)
+  const [cart, setCart] = useState([]); 
+
   const updateCartQuantity = useCallback((book, newQuantity, isAdding = false) => {
     setCart((prevCart) => {
-      const newCart = { ...prevCart };
-  
-      if (newCart[book.id]) {
-        newCart[book.id].quantity = isAdding
-          ? newCart[book.id].quantity + newQuantity
-          : Math.max(1, newQuantity);
-      } else {
-        newCart[book.id] = { ...book, quantity: newQuantity };
-      }
-  
-      return { ...newCart };
-    });
-  }, [setCart]);
+      const existingIndex = prevCart.findIndex((item) => item.id === book.id);
 
-  // Remove item from cart
-  const removeFromCart = (id) => {
-    setCart((prevCart) => {
-      const newCart = { ...prevCart };
-      delete newCart[id];
-      return newCart;
+      if (existingIndex !== -1) {
+        // Update existing item's quantity
+        const newCart = [...prevCart];
+        newCart[existingIndex].quantity = isAdding
+          ? newCart[existingIndex].quantity + newQuantity
+          : Math.max(1, newQuantity);
+        return newCart;
+      } else {
+        // Add new book at the beginning (newest item on top)
+        return [{ ...book, quantity: newQuantity }, ...prevCart];
+      }
     });
-  };
-  
+  }, []);
+
+  const removeFromCart = useCallback((bookId) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== bookId));
+  }, []);
+
   return (
     <CartContext.Provider value={{ cart, updateCartQuantity, removeFromCart }}>
       {children}
