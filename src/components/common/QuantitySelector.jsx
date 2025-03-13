@@ -1,9 +1,9 @@
 const QuantitySelector = ({ quantity, setQuantity }) => {
   const handleIncrement = () => setQuantity((prev) => prev + 1);
-  const handleDecrement = () => setQuantity((prev) => Math.max(1, prev - 1)); // Prevent negative values
+  const handleDecrement = () => setQuantity((prev) => Math.max(0, prev - 1)); // Prevent negative values
 
   return (
-    <div className="mb-5 flex items-center gap-5">
+    <div className="flex items-center gap-5">
       <div className="flex items-center border border-gray-300 rounded w-fit">
         <button 
           onClick={handleDecrement} 
@@ -16,11 +16,10 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
         <input
           type="text"
           name="quantity"
-          id="quantity"
           value={quantity}
           onChange={(e) => {
             const value = parseInt(e.target.value, 10);
-            setQuantity(isNaN(value) ? 1 : Math.max(1, value)); // Prevent invalid inputs
+            setQuantity(isNaN(value) ? 0 : Math.max(0, value)); // Prevent invalid inputs
           }}
           aria-label="Quantity" 
           className="w-12 text-center  outline-none"
