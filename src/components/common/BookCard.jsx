@@ -3,11 +3,11 @@ import { useCart } from "../../context/CartContext";
 import { useModal } from "../../context/ModalContext";
 
 function BookCard({ book, page }) {
-  const { addToCart } = useCart();
+  const { updateCartQuantity } = useCart();
   const { showModal } = useModal();
 
   const handleAddToCart = (book) => {
-    addToCart(book);
+    updateCartQuantity(book, 1, true);
     showModal("Item added to your cart"); 
   };
 
