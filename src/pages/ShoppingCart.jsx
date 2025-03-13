@@ -4,8 +4,7 @@ import CartItem from "../components/shoppingCartPage/CartItem";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 function ShoppingCart() {
-  const { cart } = useCart()
-  const cartItems = Object.values(cart);
+  const { cart } = useCart();
   const [isOrderSummaryVisible, setIsOrderSummaryVisible] = useState(true);
   const orderSummaryRef = useRef(null);
 
@@ -35,8 +34,8 @@ function ShoppingCart() {
   }, []);
   
   const subtotal = useMemo(() => {
-    return cartItems.reduce((acc, book) => acc + book.price * book.quantity, 0);
-  }, [cartItems]);
+    return cart.reduce((acc, book) => acc + book.price * book.quantity, 0);
+  }, [cart]);
 
   return (
     <div className="flex-1 flex justify-center">
@@ -50,7 +49,7 @@ function ShoppingCart() {
           )}
         </div>
         <div className="flex justify-between gap-10 flex-col lg:flex-row">
-          <div className="w-full lg:w-[90%]">
+          <div className="w-full lg:w-[80%]">
             <div className="hidden sm:grid grid-cols-[1fr_0.5fr_1fr_0.5fr_90px] lg:grid-cols-[2fr_0.5fr_1fr_0.5fr_90px] gap-4 border-b pb-2 font-semibold [&>h2]:uppercase">
               <h2>Item</h2>
               <h2>Price</h2>
@@ -60,10 +59,8 @@ function ShoppingCart() {
 
             {/* Cart Items */}
             <ul className="flex flex-col gap-3">
-              {cartItems.length > 0 ? (
-                cartItems.map((book) => (
-                  <CartItem key={book.id} book={book}></CartItem>
-                ))
+              {cart.length > 0 ? (
+                cart.map((book) => <CartItem key={book.id} book={book} />)
               ) : (
                 <p className="text-center mt-4">Your cart is empty.</p>
               )}
@@ -77,7 +74,7 @@ function ShoppingCart() {
                 <p className="font-semibold text-xl">
                   Subtotal 
                 </p>
-                <p className="text-sm">({cartItems.length} {cartItems.length === 1 ? "Item" : "Items"})</p>
+                <p className="text-sm">({cart.length} {cart.length === 1 ? "Item" : "Items"})</p>
               </div>
               <strong className="text-2xl">${subtotal.toFixed(2)}</strong>
             </div>
