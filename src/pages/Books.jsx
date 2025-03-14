@@ -93,7 +93,7 @@ function Books() {
   
   return (
     <div className="flex-1 flex p-2 justify-center">
-      <div className="flex-1 flex flex-col max-w-7xl py-6 lg:py-12 relative">
+      <div className="flex-1 flex flex-col max-w-7xl py-6 relative">
         <div className="flex mb-5 justify-between lg:justify-center gap-5">
           <button 
             className="lg:disabled lg:hidden flex items-center text-lg font-semibold px-4 py-2 bg-blue-600 text-white rounded-md"
@@ -105,14 +105,20 @@ function Books() {
             Filters
           </button>
 
-          {/* This is where search input will be */}
-          <input
-            type="text"
-            placeholder="Search for books..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full max-w-md px-4 py-2 border rounded-md"
-          />
+          <div className="relative w-full max-w-md">
+            <input
+              type="text"
+              placeholder="Search for books..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-10 py-2 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {/* Search Icon */}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clipRule="evenodd" />
+            </svg>
+
+          </div>
         </div>
 
         {/* Overlay (Only visible when sidebar is open) */}
