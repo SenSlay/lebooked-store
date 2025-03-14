@@ -15,6 +15,7 @@ function Books() {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category"); // Get category from URL
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Set genre filter based from URL
   useEffect(() => {
@@ -54,13 +55,16 @@ function Books() {
       );
     }
 
-    // Ensure all books show if no filters are applied
-    if (!filters.price && filters.genres.length === 0 && filters.tags.length === 0) {
-      updatedBooks = books; // Reset to all books
+    // Filter by search
+    if (searchQuery.trim() !== "") {
+      updatedBooks = updatedBooks.filter((book) =>
+        book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.author.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
   
     setFilteredBooks(updatedBooks);
-  }, [filters, books]); 
+  }, [filters, books, searchQuery]); 
 
   const handlePriceFilter = (value) => {
     setFilters((prev) => ({
@@ -90,9 +94,9 @@ function Books() {
   return (
     <div className="flex-1 flex p-2 justify-center">
       <div className="flex-1 flex flex-col max-w-7xl py-6 lg:py-12 relative">
-        <div>
+        <div className="flex mb-5 justify-between lg:justify-center gap-5">
           <button 
-            className="lg:disabled lg:hidden flex items-center text-lg font-semibold mb-3 px-4 py-2 bg-blue-600 text-white rounded-md"
+            className="lg:disabled lg:hidden flex items-center text-lg font-semibold px-4 py-2 bg-blue-600 text-white rounded-md"
             onClick={() => setIsFilterOpen(true)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 mr-2">
@@ -100,6 +104,15 @@ function Books() {
             </svg>
             Filters
           </button>
+
+          {/* This is where search input will be */}
+          <input
+            type="text"
+            placeholder="Search for books..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full max-w-md px-4 py-2 border rounded-md"
+          />
         </div>
 
         {/* Overlay (Only visible when sidebar is open) */}
