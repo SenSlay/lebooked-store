@@ -39,7 +39,7 @@ function ShoppingCart() {
 
   return (
     <div className="flex-1 flex justify-center">
-      <div className="flex-1 flex flex-col max-w-7xl py-12 px-3 xl:px-0">
+      <div className="flex-1 flex flex-col max-w-7xl py-6 lg:py-12 px-3 xl:px-0">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-semibold">Your Shopping Cart</h1>
           {!isOrderSummaryVisible && (
