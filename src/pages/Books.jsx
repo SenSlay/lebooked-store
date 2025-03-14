@@ -184,8 +184,8 @@ function Books() {
             <ul className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
             {filteredBooks.length > 0 ? (
               filteredBooks.map((book) => (
-                <li>
-                  <BookCard key={book.id} book={book} page={"books"} />
+                <li key={book.id}>
+                  <BookCard book={book} page={"books"} />
                 </li>
               ))
             ) : (
