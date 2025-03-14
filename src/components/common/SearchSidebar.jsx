@@ -1,15 +1,18 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { BooksContext } from "../../context/BooksContext";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export default function SearchSidebar({ isOpen, onClose }) {
   const [searchQuery, setSearchQuery] = useState("");
   const { books } = useContext(BooksContext)
 
-  const filteredBooks = books.filter(book => 
-    book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    book.author.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredBooks = useMemo(() => {
+    return books.filter(book => 
+      book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [books, searchQuery]);
 
   return (
     <div className={`fixed inset-0 z-50 bg-black bg-opacity-40 transition-opacity ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`} onClick={onClose}>
@@ -47,4 +50,9 @@ export default function SearchSidebar({ isOpen, onClose }) {
       </div>
     </div>
   );
+}
+
+SearchSidebar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
 }
