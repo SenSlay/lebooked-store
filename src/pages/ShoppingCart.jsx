@@ -79,7 +79,7 @@ function ShoppingCart() {
               <strong className="text-2xl">${subtotal.toFixed(2)}</strong>
             </div>
             <p className="italic text-sm mb-3">Shipping and taxes computed at checkout</p>
-            <button className="bg-blue-600 text-white p-2 rounded mb-5 hover:bg-blue-700">Checkout</button>
+            <button className="bg-blue-600 text-white p-2 rounded mb-5 hover:bg-blue-700" onClick={() => alert("Checkout successful yehey?")}>Checkout</button>
             <Link to="/books" className="underline text-right">Continue Shopping</Link>
           </div>
         </div>
