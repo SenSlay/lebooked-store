@@ -7,17 +7,19 @@ import { ModalProvider } from "./context/ModalContext";
 
 function App() {
   return (
-    <CartProvider>
-      <ModalProvider>
-        <BooksProvider>
-          <Header />
-          <main className="flex-1 flex-grow flex flex-col">
-            <Outlet />
-          </main>
-        </BooksProvider>
-        <Footer />
-      </ModalProvider>
-    </CartProvider>
+    <>
+      <CartProvider>
+        <ModalProvider>
+          <BooksProvider>
+            <Header />
+            <main className="flex-1 flex-grow flex flex-col">
+              <Outlet />
+            </main>
+          </BooksProvider>
+        </ModalProvider>
+      </CartProvider>
+      <Footer />
+    </>
   );
 }
 
