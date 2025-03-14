@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useCart } from "../../context/CartContext";
 import QuantitySelector from "../common/QuantitySelector";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const CartItem = ({ book }) => {
   const { updateCartQuantity, removeFromCart } = useCart();
@@ -46,5 +47,15 @@ const CartItem = ({ book }) => {
     </li>
   );
 };
+
+CartItem.propTypes = {
+  book: PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // String or number ID
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired, // Ensures an image URL is passed
+      price: PropTypes.number.isRequired,
+  }).isRequired,
+}
 
 export default CartItem;

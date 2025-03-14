@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const HomeSection = ({ title, children }) => {
@@ -12,6 +13,11 @@ const HomeSection = ({ title, children }) => {
       </section>
     </div>
   );
+};
+
+HomeSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default HomeSection;

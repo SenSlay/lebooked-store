@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import BookCard from "../common/BookCard";
 import { useRef, useState, useEffect } from "react";
 
@@ -105,5 +106,17 @@ function Carousel({ books }) {
     </div>
   )
 }
+
+Carousel.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, 
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired, 
+      price: PropTypes.number.isRequired,
+    })
+  ).isRequired, 
+};
 
 export default Carousel;

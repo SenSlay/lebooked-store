@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import useBooks from "../hooks/useBooks";
+import PropTypes from "prop-types";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const BooksContext = createContext();
@@ -12,4 +13,8 @@ export const BooksProvider = ({ children }) => {
       {children}
     </BooksContext.Provider>
   );
+};
+
+BooksProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

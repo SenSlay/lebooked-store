@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { createContext, useState, useContext } from "react";
 
 // Create Context
@@ -36,4 +37,8 @@ export const ModalProvider = ({ children }) => {
       )}
     </ModalContext.Provider>
   );
+};
+
+ModalProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

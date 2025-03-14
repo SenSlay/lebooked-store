@@ -24,8 +24,7 @@ function PopularCategories({ titles }) {
 }
 
 PopularCategories.propTypes = {
-  titles: PropTypes.array,
+  titles: PropTypes.array.isRequired,
 }
-
 
 export default PopularCategories;
