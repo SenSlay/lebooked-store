@@ -134,6 +134,141 @@
       "price": 18.99,
       "genres": ["Fiction", "Historical"],
       "tags": ["Popular", "Highly Rated", "Book Club Favorite"]
+    },
+    {
+      "id": 16,
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "description": "A classic novel about teenage rebellion and the struggles of growing up.",
+      "price": 13.49,
+      "genres": ["Fiction", "Classic"],
+      "tags": ["Classic", "Coming-of-Age", "Highly Rated"]
+    },
+    {
+      "id": 17,
+      "title": "Sapiens: A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "description": "A thought-provoking look at the history and impact of the human species.",
+      "price": 19.99,
+      "genres": ["History", "Non-Fiction"],
+      "tags": ["Bestseller", "Highly Rated", "Thought-Provoking"]
+    },
+    {
+      "id": 18,
+      "title": "Where the Crawdads Sing",
+      "author": "Delia Owens",
+      "description": "A blend of mystery and coming-of-age novel set in the marshlands of North Carolina.",
+      "price": 17.25,
+      "genres": ["Fiction", "Mystery"],
+      "tags": ["Bestseller", "Book Club Favorite", "Emotional"]
+    },
+    {
+      "id": 19,
+      "title": "The Silent Patient",
+      "author": "Alex Michaelides",
+      "description": "A psychological thriller about a woman who stops speaking after a shocking crime.",
+      "price": 15.99,
+      "genres": ["Thriller", "Psychological"],
+      "tags": ["Bestseller", "Highly Rated", "Page-Turner"]
+    },
+    {
+      "id": 20,
+      "title": "The Night Circus",
+      "author": "Erin Morgenstern",
+      "description": "A magical love story set in a mysterious traveling circus.",
+      "price": 14.50,
+      "genres": ["Fantasy", "Romance"],
+      "tags": ["Enchanting", "Fan Favorite", "Highly Rated"]
+    },
+    {
+      "id": 21,
+      "title": "Project Hail Mary",
+      "author": "Andy Weir",
+      "description": "A gripping sci-fi novel about an astronaut’s race to save humanity.",
+      "price": 22.75,
+      "genres": ["Science Fiction", "Adventure"],
+      "tags": ["Bestseller", "Highly Rated", "Page-Turner"]
+    },
+    {
+      "id": 22,
+      "title": "Verity",
+      "author": "Colleen Hoover",
+      "description": "A chilling romantic thriller filled with dark secrets and shocking twists.",
+      "price": 18.99,
+      "genres": ["Thriller", "Romance"],
+      "tags": ["Trending", "Psychological", "Page-Turner"]
+    },
+    {
+      "id": 23,
+      "title": "The Shadow of the Wind",
+      "author": "Carlos Ruiz Zafón",
+      "description": "A literary mystery set in post-war Barcelona, uncovering secrets from the past.",
+      "price": 16.75,
+      "genres": ["Fiction", "Historical"],
+      "tags": ["Bestseller", "Highly Rated", "Intriguing"]
+    },
+    {
+      "id": 24,
+      "title": "The Road",
+      "author": "Cormac McCarthy",
+      "description": "A haunting post-apocalyptic novel about survival and fatherhood.",
+      "price": 14.99,
+      "genres": ["Dystopian", "Fiction"],
+      "tags": ["Award-Winning", "Highly Rated", "Emotional"]
+    },
+    {
+      "id": 25,
+      "title": "The Giver",
+      "author": "Lois Lowry",
+      "description": "A dystopian novel exploring the importance of memory and individuality.",
+      "price": 12.99,
+      "genres": ["Dystopian", "Young Adult"],
+      "tags": ["Classic", "Thought-Provoking", "Highly Rated"]
+    },
+    {
+      "id": 26,
+      "title": "The House in the Cerulean Sea",
+      "author": "TJ Klune",
+      "description": "A heartwarming fantasy about finding family in unexpected places.",
+      "price": 19.25,
+      "genres": ["Fantasy", "LGBTQ+"],
+      "tags": ["Bestseller", "Heartfelt", "Highly Rated"]
+    },
+    {
+      "id": 27,
+      "title": "The 48 Laws of Power",
+      "author": "Robert Greene",
+      "description": "A deep dive into power, manipulation, and strategy.",
+      "price": 23.99,
+      "genres": ["Self-Help", "Business"],
+      "tags": ["Bestseller", "Controversial", "Practical Advice"]
+    },
+    {
+      "id": 28,
+      "title": "Babel: An Arcane History",
+      "author": "R.F. Kuang",
+      "description": "A dark academia fantasy novel exploring language, colonialism, and revolution.",
+      "price": 20.50,
+      "genres": ["Fantasy", "Historical"],
+      "tags": ["Trending", "Highly Rated", "Intriguing"]
+    },
+    {
+      "id": 29,
+      "title": "Legends & Lattes",
+      "author": "Travis Baldree",
+      "description": "A cozy fantasy about an orc warrior retiring to open a coffee shop.",
+      "price": 16.99,
+      "genres": ["Fantasy", "Slice of Life"],
+      "tags": ["Wholesome", "Feel-Good", "Highly Rated"]
+    },
+    {
+      "id": 30,
+      "title": "The Art of War",
+      "author": "Sun Tzu",
+      "description": "An ancient text on strategy and warfare, still relevant today.",
+      "price": 9.99,
+      "genres": ["Philosophy", "Military"],
+      "tags": ["Classic", "Timeless Wisdom", "Practical Advice"]
     }
   ]
 }
