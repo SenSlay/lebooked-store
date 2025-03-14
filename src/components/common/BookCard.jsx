@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { useModal } from "../../context/ModalContext";
+import PropTypes from "prop-types";
 
 function BookCard({ book, page }) {
   const { updateCartQuantity } = useCart();
@@ -25,5 +26,16 @@ function BookCard({ book, page }) {
     </Link>
   )
 }
+
+BookCard.propTypes = {
+  book: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // String or number ID
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired, // Ensures an image URL is passed
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+  page: PropTypes.string,
+};
 
 export default BookCard;

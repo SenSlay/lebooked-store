@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const QuantitySelector = ({ quantity, setQuantity }) => {
   const handleIncrement = () => setQuantity((prev) => prev + 1);
   const handleDecrement = () => setQuantity((prev) => Math.max(0, prev - 1)); // Prevent negative values
@@ -21,6 +23,11 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
             const value = parseInt(e.target.value, 10);
             setQuantity(isNaN(value) ? 0 : Math.max(0, value)); // Prevent invalid inputs
           }}
+          onKeyDown={(e) => {
+            if (!/[0-9]/.test(e.key) && e.key !== "Backspace") {
+              e.preventDefault(); // ✅ Prevents typing non-numeric characters
+            }
+          }}
           aria-label="Quantity" 
           className="w-12 text-center  outline-none"
         />
@@ -36,5 +43,10 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
     </div>
   );
 };
+
+QuantitySelector.propTypes = {
+  quantity: PropTypes.number.isRequired,
+  setQuantity: PropTypes.func.isRequired,
+}
 
 export default QuantitySelector
