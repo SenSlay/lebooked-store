@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 
 export default function FilterSection({ title, options, selectedValue, onChange, isMulti = false }) {
@@ -48,3 +49,21 @@ export default function FilterSection({ title, options, selectedValue, onChange,
     </div>
   );
 }
+
+FilterSection.propTypes = {
+  title: PropTypes.string.isRequired, // Title should be a required string
+  options: PropTypes.arrayOf(PropTypes.shape({ // Array of objects with 'value' & 'label'
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })).isRequired,
+  selectedValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string) // Can be string (single select) or array (multi select)
+  ]).isRequired,
+  onChange: PropTypes.func.isRequired, // Function to handle change
+  isMulti: PropTypes.bool, // Optional boolean, defaults to false
+};
+
+FilterSection.defaultProps = {
+  isMulti: false,
+};
