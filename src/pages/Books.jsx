@@ -171,8 +171,11 @@ function Books() {
               title="Tags"
               options={[
                 { value: "Bestseller", label: "Bestseller" },
-                { value: "Trending", label: "Trending" },
+                { value: "Emotional", label: "Emotional" },
+                { value: "Highly Rated", label: "Highly Rated" },
                 { value: "Movie Adaptation", label: "Movie Adaptation" },
+                { value: "Thought-Provoking", label: "Thought-Provoking" },
+                { value: "Trending", label: "Trending" },
               ]}
               selectedValue={filters.tags}
               onChange={handleTagsFilter}
@@ -183,12 +186,15 @@ function Books() {
             <FilterSection 
               title="Genres"
               options={[
+                { value: "Adventure", label: "Adventure" },
                 { value: "Classic", label: "Classic" },
                 { value: "Fiction", label: "Fiction" },
+                { value: "History", label: "History" },
                 { value: "Pyschology", label: "Pyschology" },
-                { value: "Self-help", label: "Self-help" },
                 { value: "Science Fiction", label: "Science Fiction" },
+                { value: "Self-help", label: "Self-help" },
                 { value: "Romance", label: "Romance" },
+                { value: "Thriller", label: "Thriller" },
               ]}
               selectedValue={filters.genres}
               onChange={handleGenreFilter}
