@@ -204,7 +204,7 @@ function Books() {
 
           {/* Books List */}
           <div className="flex-1 lg:flex-[0_0_80%] px-1 lg:px-5">
-            <h1 className="text-2xl font-semixbold">Books</h1>
+            <h1 className="text-2xl font-semibold">Books</h1>
             <p className="text-gray-500 mb-5">{filteredBooks.length} results</p>
             <ul className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
             {filteredBooks.length > 0 ? (
