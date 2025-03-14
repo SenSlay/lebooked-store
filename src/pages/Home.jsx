@@ -1,9 +1,9 @@
 // import { useEffect, useState } from "react";
-import Carousel from "../components/Carousel";
-import HomeSection from "../components/HomeSection";
+import Carousel from "../components/homePage/Carousel";
+import HomeSection from "../components/homePage/HomeSection";
 import { BooksContext } from "../context/BooksContext";
 import { useContext } from "react";
-import PopularCategories from "../components/PopularCategories";
+import PopularCategories from "../components/homePage/PopularCategories";
 import { Link } from "react-router-dom";
 
 function Home() {
