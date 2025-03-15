@@ -15,7 +15,7 @@ function Home() {
 
   return (
     <>
-      <div className="relative bg-[url('../images/hero.jpg')] bg-no-repeat bg-cover bg-center before:absolute before:inset-0 before:bg-black/60 h-[650px] flex justify-center items-center ">
+      <div className="relative bg-[url('../images/hero1.jpg')] bg-no-repeat bg-cover bg-center before:absolute before:inset-0 before:bg-black/60 h-[650px] flex justify-center items-center ">
         <div className="relative z-10 p-6 text-white text-center min-w-[60%] flex flex-col items-center">
           <h1 className="font-bold text-7xl text-blue-500 mb-3">LeBooked</h1>
           <p className="font-medium text-2xl mb-5">
