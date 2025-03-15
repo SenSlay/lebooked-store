@@ -1,13 +1,12 @@
 // import { useEffect, useState } from "react";
 import Carousel from "../components/homePage/Carousel";
 import HomeSection from "../components/homePage/HomeSection";
-import { BooksContext } from "../context/BooksContext";
-import { useContext } from "react";
 import PopularCategories from "../components/homePage/PopularCategories";
 import { Link } from "react-router-dom";
+import { useBooksContext } from "../context/BooksContext";
 
 function Home() {
-  const { books, loading, error } = useContext(BooksContext);
+  const { books, loading, error } = useBooksContext();
 
   if (error) return <p>Error: {error}</p>;
   

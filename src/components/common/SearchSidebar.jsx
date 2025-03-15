@@ -1,11 +1,11 @@
-import { useContext, useMemo, useState } from "react";
-import { BooksContext } from "../../context/BooksContext";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useBooksContext } from "../../context/BooksContext";
 
 export default function SearchSidebar({ isOpen, onClose }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const { books } = useContext(BooksContext)
+  const { books } = useBooksContext()
 
   const filteredBooks = useMemo(() => {
     return books.filter(book => 

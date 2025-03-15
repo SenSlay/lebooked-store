@@ -1,11 +1,11 @@
-import { BooksContext } from "../context/BooksContext";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import BookCard from "../components/common/BookCard";
 import FilterSection from "../components/booksPage/FilterSection";
 import { useSearchParams } from "react-router-dom";
+import { useBooksContext } from "../context/BooksContext";
 
 function Books() {
-  const { books } = useContext(BooksContext)
+  const { books } = useBooksContext()
   const [filteredBooks, setFilteredBooks] = useState(books);
   const [filters, setFilters] = useState({
     price: null,

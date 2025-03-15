@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useContext, useState } from "react";
-import { BooksContext } from "../context/BooksContext";
+import { useState } from "react";
 import QuantitySelector from "../components/common/QuantitySelector";
 import { useCart } from "../context/CartContext";
 import { useModal } from "../context/ModalContext";
 import { useNavigate } from "react-router-dom";
+import { useBooksContext } from "../context/BooksContext";
 
 const BookDetails = () => {
   const { id } = useParams();
-  const { books } = useContext(BooksContext);
+  const { books } = useBooksContext();
   const [quantity, setQuantity] = useState(1);
   const { updateCartQuantity, cart } = useCart();
   const { showModal } = useModal();
