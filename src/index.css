@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  @apply font-poppins
+  @apply font-poppins;
 }
 
 #root {
-  @apply flex flex-col min-h-screen
+  @apply flex flex-col min-h-screen;
 }
 
 a {

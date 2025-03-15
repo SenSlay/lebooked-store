@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
-import CartItem from "../components/shoppingCartPage/CartItem";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import CartItem from '../components/shoppingCartPage/CartItem';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 function ShoppingCart() {
   const { cart } = useCart();
@@ -9,8 +9,8 @@ function ShoppingCart() {
   const orderSummaryRef = useRef(null);
 
   useEffect(() => {
-    const orderSummaryElement = orderSummaryRef.current; 
-  
+    const orderSummaryElement = orderSummaryRef.current;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsOrderSummaryVisible(entry.isIntersecting);
@@ -18,13 +18,13 @@ function ShoppingCart() {
       {
         root: null, // Use the viewport as the root
         threshold: 0.1, // Lowered threshold for testing
-      }
+      },
     );
-  
+
     if (orderSummaryElement) {
       observer.observe(orderSummaryElement);
     }
-  
+
     // Cleanup the observer on unmount
     return () => {
       if (orderSummaryElement) {
@@ -32,7 +32,7 @@ function ShoppingCart() {
       }
     };
   }, []);
-  
+
   const subtotal = useMemo(() => {
     return cart.reduce((acc, book) => acc + book.price * book.quantity, 0);
   }, [cart]);
@@ -67,25 +67,38 @@ function ShoppingCart() {
             </ul>
           </div>
 
-          <div className="flex flex-col self-center lg:self-start max-w-96 h-fit p-7 border-[1px] border-black" id="order-summary" ref={orderSummaryRef}>
+          <div
+            className="flex flex-col self-center lg:self-start max-w-96 h-fit p-7 border-[1px] border-black"
+            id="order-summary"
+            ref={orderSummaryRef}
+          >
             <h1 className="text-2xl font-semibold mb-5">Order Summary</h1>
             <div className="flex justify-between ">
               <div className="mb-5">
-                <p className="font-semibold text-xl">
-                  Subtotal 
+                <p className="font-semibold text-xl">Subtotal</p>
+                <p className="text-sm">
+                  ({cart.length} {cart.length === 1 ? 'Item' : 'Items'})
                 </p>
-                <p className="text-sm">({cart.length} {cart.length === 1 ? "Item" : "Items"})</p>
               </div>
               <strong className="text-2xl">${subtotal.toFixed(2)}</strong>
             </div>
-            <p className="italic text-sm mb-3">Shipping and taxes computed at checkout</p>
-            <button className="bg-blue-600 text-white p-2 rounded mb-5 hover:bg-blue-700" onClick={() => alert("Checkout successful yehey?")}>Checkout</button>
-            <Link to="/books" className="underline text-right">Continue Shopping</Link>
+            <p className="italic text-sm mb-3">
+              Shipping and taxes computed at checkout
+            </p>
+            <button
+              className="bg-blue-600 text-white p-2 rounded mb-5 hover:bg-blue-700"
+              onClick={() => alert('Checkout successful yehey?')}
+            >
+              Checkout
+            </button>
+            <Link to="/books" className="underline text-right">
+              Continue Shopping
+            </Link>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default ShoppingCart;
