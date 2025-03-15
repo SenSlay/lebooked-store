@@ -2,7 +2,11 @@
 
 A mock online bookstore web application where users can browse books, view details, and add them to their cart.
 
-## 🌐 LeBooked Live Demo
+## 🌐 Live Demo
+
+[LeBooked Live Demo](https://lebooked-store.vercel.app/)
+
+![Image](https://github.com/user-attachments/assets/2e027b1b-5c79-4f54-90fb-c11df69a1e7d)
 
 ## Concepts I Practiced & Learned
 
