@@ -16,7 +16,7 @@ export default function SearchSidebar({ isOpen, onClose }) {
 
   return (
     <div className={`fixed inset-0 z-50 bg-black bg-opacity-40 transition-opacity ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`} onClick={onClose}>
-      <div className={`fixed top-0 right-0 h-full w-80 md:w-[500px] bg-white shadow-lg transform transition-transform ${isOpen ? "translate-x-0" : "translate-x-full"}`} onClick={(e) => e.stopPropagation()}>
+      <div data-testid="search-sidebar" className={`fixed top-0 right-0 h-full w-80 md:w-[500px] bg-white shadow-lg transform transition-transform ${isOpen ? "translate-x-0" : "translate-x-full"}`} onClick={(e) => e.stopPropagation()}>
         <div className="p-5 flex justify-between items-center border-b">
           <h2 className="text-lg font-semibold">Search</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-black">✕</button>
