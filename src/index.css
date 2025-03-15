@@ -3,5 +3,23 @@
 @tailwind utilities;
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  @apply font-poppins
+}
+
+#root {
+  @apply flex flex-col min-h-screen
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
