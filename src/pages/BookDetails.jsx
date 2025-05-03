@@ -54,7 +54,7 @@ const BookDetails = () => {
       <div className="flex-1 flex flex-col lg:flex-row justify-center items-center max-w-7xl lg:gap-20 p-5 lg:p-12">
         <div>
           <img
-            src={book.image}
+            src={book.imageUrl}
             alt={book.title}
             className="h-80 lg:h-96 object-cover"
           />
