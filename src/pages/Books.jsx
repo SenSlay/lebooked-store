@@ -16,6 +16,49 @@ function Books() {
   const category = searchParams.get('category'); // Get category from URL
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [tags, setTags] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [loadingFilters, setLoadingFilters] = useState(true);
+
+  // Fetch genres and tags from the API
+  useEffect(() => {
+    const fetchTagsGeneres = async () => {
+      const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+
+      try {
+        const [tagsResponse, genresResponse] = await Promise.all([
+          fetch(`${baseUrl}/tags`),
+          fetch(`${baseUrl}/genres`)
+        ]);
+
+        if (!tagsResponse.ok || !genresResponse.ok) {
+          throw new Error('Failed to fetch tags or genres');
+        }
+
+        const [tagsData, genresData] = await Promise.all([
+          tagsResponse.json(),
+          genresResponse.json()
+        ]);
+  
+        // Convert API data to format: { value, label }
+        setTags(tagsData.map(tag => ({
+          value: tag.name,
+          label: tag.name
+        })));
+
+        setGenres(genresData.map(genre => ({
+          value: genre.name,
+          label: genre.name
+        })));
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        setLoadingFilters(false);
+      }
+    };
+    
+    fetchTagsGeneres();
+  }, [genres, tags]);
 
   // Set genre filter based from URL
   useEffect(() => {
@@ -27,6 +70,7 @@ function Books() {
     }
   }, [category]);
 
+  // Set filtered books based on genres, price, tags, and search query
   useEffect(() => {
     let updatedBooks = books;
 
@@ -189,39 +233,26 @@ function Books() {
             />
 
             {/* Tags Section */}
-            <FilterSection
+            {loadingFilters ? <p>Loading...</p> :
+              <FilterSection
               title="Tags"
-              options={[
-                { value: 'Bestseller', label: 'Bestseller' },
-                { value: 'Emotional', label: 'Emotional' },
-                { value: 'Highly Rated', label: 'Highly Rated' },
-                { value: 'Movie Adaptation', label: 'Movie Adaptation' },
-                { value: 'Thought-Provoking', label: 'Thought-Provoking' },
-                { value: 'Trending', label: 'Trending' },
-              ]}
+              options={tags}
               selectedValue={filters.tags}
               onChange={handleTagsFilter}
               isMulti={true}
-            />
+              />
+            } 
 
             {/* Genres Section */}
-            <FilterSection
+            {loadingFilters ? <p>Loading...</p> :
+              <FilterSection
               title="Genres"
-              options={[
-                { value: 'Adventure', label: 'Adventure' },
-                { value: 'Classic', label: 'Classic' },
-                { value: 'Fiction', label: 'Fiction' },
-                { value: 'History', label: 'History' },
-                { value: 'Pyschology', label: 'Pyschology' },
-                { value: 'Science Fiction', label: 'Science Fiction' },
-                { value: 'Self-help', label: 'Self-help' },
-                { value: 'Romance', label: 'Romance' },
-                { value: 'Thriller', label: 'Thriller' },
-              ]}
+              options={genres}
               selectedValue={filters.genres}
               onChange={handleGenreFilter}
               isMulti={true}
-            />
+              />
+            } 
           </div>
 
           {/* Books List */}
