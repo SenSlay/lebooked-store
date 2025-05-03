@@ -21,7 +21,7 @@ const CartItem = ({ book }) => {
       <div className="flex items-start lg:items-center gap-3 flex-col lg:flex-row">
         <Link to={`/books/${book.id}`}>
           <img
-            src={book.image}
+            src={book.imageUrl}
             alt={book.title}
             className="object-cover h-40 lg:h-52 cursor-pointer hover:scale-105"
           />
