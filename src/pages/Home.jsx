@@ -10,8 +10,13 @@ function Home() {
 
   if (error) return <p>Error: {error}</p>;
 
-  const bestsellers = books.filter((book) => book.tags.includes('Bestseller'));
-  const trending = books.filter((book) => book.tags.includes('Trending'));
+  const bestsellers = books.filter((book) =>
+    book.tags.some(tag => tag.name === 'Bestseller')
+  );
+  
+  const trending = books.filter((book) =>
+    book.tags.some(tag => tag.name === 'Trending')
+  );
 
   return (
     <>
@@ -31,7 +36,7 @@ function Home() {
       </div>
       <HomeSection title="Popular Categories">
         <PopularCategories
-          titles={['Self-Help', 'Romance', 'Science Fiction', 'Classic']}
+          titles={['Self Help', 'Romance', 'Science Fiction', 'Classic']}
         ></PopularCategories>
       </HomeSection>
 
