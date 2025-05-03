@@ -42,7 +42,7 @@ function Books() {
       updatedBooks = updatedBooks.filter((book) =>
         filters.genres.every((genre) =>
           book.genres.some(
-            (bGenre) => bGenre.toLowerCase() === genre.toLowerCase(),
+            (bGenre) => bGenre.name.toLowerCase() === genre.toLowerCase(),
           ),
         ),
       );
@@ -52,7 +52,7 @@ function Books() {
     if (filters.tags.length > 0) {
       updatedBooks = updatedBooks.filter((book) =>
         filters.tags.every((tag) =>
-          book.tags.some((bTag) => bTag.toLowerCase() === tag.toLowerCase()),
+          book.tags.some((bTag) => bTag.name.toLowerCase() === tag.toLowerCase()),
         ),
       );
     }
