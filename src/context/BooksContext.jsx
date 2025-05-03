@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 export const BooksContext = createContext();
 
 export const BooksProvider = ({ children }) => {
-  const { books, loading, error } = useBooks('/db.json');
+  const { books, loading, error } = useBooks(import.meta.env.VITE_API_BASE_URL);
 
   return (
     <BooksContext.Provider value={{ books, loading, error }}>
