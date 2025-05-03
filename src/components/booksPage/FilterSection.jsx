@@ -47,7 +47,7 @@ export default function FilterSection({
       </button>
 
       <div
-        className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'h-fit opacity-100' : 'max-h-0 opacity-0'}`}
       >
         <div className="flex flex-col">
           {options.map(({ value, label }) => {
