@@ -10,44 +10,53 @@ const BookDetails = () => {
   const { id } = useParams();
   const { books } = useBooksContext();
   const [quantity, setQuantity] = useState(1);
-  const { updateCartQuantity, cart } = useCart();
+  const { updateCartItemQuantity, cart } = useCart();
   const { showModal } = useModal();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const book = books.find((b) => b.id.toString() === id);
 
+  if (!book) {
+    return <p className="text-center text-red-500">Book not found!</p>;
+  }
+
+  const existingCartItem = cart.find((item) => item.bookId === book.id);
+  
   const handleAddToCart = () => {
-    if (quantity === 0) {
+    if (!quantity || quantity < 1) {
       setError('Quantity must be at least 1.');
       return;
     }
     setError(null);
-    updateCartQuantity(book, quantity, true);
+
+    const newQuantity = existingCartItem
+    ? existingCartItem.quantity + quantity
+    : quantity;
+
+    updateCartItemQuantity(book.id, newQuantity);
     showModal(`Book added to your cart`);
   };
 
   const handleBuyNow = () => {
-    if (quantity === 0) {
+    if (!quantity || quantity < 1) {
       setError('Quantity must be at least 1.');
       return;
     }
     setError(null);
 
-    const existingCartItem = cart.find((item) => item.id === book.id);
+    const newQuantity = existingCartItem
+      ? existingCartItem.quantity + quantity
+      : quantity;
 
     if (!existingCartItem) {
       // Add to cart only if not already present
-      updateCartQuantity(book, quantity, true);
+      updateCartItemQuantity(book.id, newQuantity);
     }
 
     // Redirect to Shopping Cart page
     navigate('/cart');
   };
-
-  if (!book) {
-    return <p className="text-center text-red-500">Book not found!</p>;
-  }
 
   return (
     <div className="flex p-2 justify-center box-content">
