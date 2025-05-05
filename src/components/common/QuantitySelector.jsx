@@ -1,14 +1,48 @@
 import PropTypes from 'prop-types';
 
-const QuantitySelector = ({ quantity, setQuantity }) => {
-  const handleIncrement = () => setQuantity((prev) => prev + 1);
-  const handleDecrement = () => setQuantity((prev) => Math.max(0, prev - 1)); // Prevent negative values
+const QuantitySelector = ({  
+  quantity,
+  setQuantity,
+  onIncrement,
+  onDecrement,
+  onInputChange,
+  }) => {
+    
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+
+    // Allow user to clear the field temporarily
+    if (value === '') {
+      setQuantity('');
+      return;
+    } else if (value < 1 || value > 9999) {
+      return;
+    }
+
+    const numericValue = parseInt(value, 10);
+    if (!isNaN(numericValue)) {
+      setQuantity(numericValue);
+      onInputChange?.(Math.max(0, numericValue));
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'];
+    if (!/[0-9]/.test(e.key) && !allowedKeys.includes(e.key)) {
+      e.preventDefault();
+    }
+  };
 
   return (
     <div className="flex items-center gap-5">
       <div className="flex items-center border border-gray-300 rounded w-fit">
         <button
-          onClick={handleDecrement}
+          onClick={() => {  
+            if (quantity > 1) {
+            onDecrement?.(); 
+            setQuantity(prev => prev - 1);
+            }
+          }}
           className="px-3 py-1 bg-gray-200 hover:bg-gray-300 text-lg font-bold"
           aria-label="Decrease quantity"
         >
@@ -27,20 +61,13 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
           type="text"
           name="quantity"
           value={quantity}
-          onChange={(e) => {
-            const value = parseInt(e.target.value, 10);
-            setQuantity(isNaN(value) ? 0 : Math.max(0, value)); // Prevent invalid inputs
-          }}
-          onKeyDown={(e) => {
-            if (!/[0-9]/.test(e.key) && e.key !== 'Backspace') {
-              e.preventDefault(); // ✅ Prevents typing non-numeric characters
-            }
-          }}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           aria-label="Quantity"
           className="w-12 text-center  outline-none"
         />
         <button
-          onClick={handleIncrement}
+          onClick={() => { onIncrement?.(); setQuantity(prev => prev + 1); }}
           className="px-3 py-1 bg-gray-200 hover:bg-gray-300 text-lg font-bold"
           aria-label="Increase quantity"
         >
