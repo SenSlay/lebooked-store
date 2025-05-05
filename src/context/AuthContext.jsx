@@ -1,15 +1,34 @@
 // src/context/AuthContext.jsx
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext({ user: null });
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
-  const [token, setToken] = useState(() => localStorage.getItem('token') || null);
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
+
+    if (storedToken) {
+      try {
+        const decoded = jwtDecode(storedToken);
+        const isExpired = decoded.exp * 1000 < Date.now();
+
+        if (isExpired) {
+          logout();
+        } else {
+          setToken(storedToken);
+          setUser(storedUser ? JSON.parse(storedUser) : null);
+        }
+      } catch (err) {
+        console.error('Invalid token:', err);
+        logout();
+      }
+    }
+  }, []);
 
   const login = (userData, token) => {
     setUser(userData);
