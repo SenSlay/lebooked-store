@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import { createContext, useState, useContext, useCallback, useEffect } from 'react';
+import { useModal } from './ModalContext';
+import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const CartContext = createContext();
 
@@ -7,6 +10,9 @@ export const CartProvider = ({ children, userId, token }) => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+  const { showModal } = useModal();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   // Load cart on mount
   useEffect(() => {
@@ -80,6 +86,13 @@ export const CartProvider = ({ children, userId, token }) => {
           body: JSON.stringify({ quantity }),
         });
 
+        if (res.status === 401) {
+          showModal('Session expired. Please log in again.');
+          logout();
+          navigate('/login');
+          return;
+        }
+
         if (!res.ok) throw new Error('Failed to update item quantity');
 
         const cartRes = await fetch(`${baseUrl}/cart`, {
@@ -93,7 +106,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error updating item quantity:', err.message);
       }
     },
-    [token, baseUrl]
+    [token, baseUrl, showModal, logout, navigate]
   );
 
   const incrementCartItem = useCallback(
@@ -105,6 +118,13 @@ export const CartProvider = ({ children, userId, token }) => {
             'Authorization': `Bearer ${token}`,
            },
         });
+
+        if (res.status === 401) {
+          showModal('Session expired. Please log in again.');
+          logout();
+          navigate('/login');
+          return;
+        }
 
         if (!res.ok) throw new Error('Failed to increment item');
 
@@ -119,7 +139,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error incrementing item:', err.message);
       }
     },
-    [token, baseUrl]
+    [token, baseUrl, showModal, logout, navigate]
   );
 
   const decrementCartItem = useCallback(
@@ -131,6 +151,13 @@ export const CartProvider = ({ children, userId, token }) => {
             'Authorization': `Bearer ${token}`,
            },
         });
+
+        if (res.status === 401) {
+          showModal('Session expired. Please log in again.');
+          logout();
+          navigate('/login');
+          return;
+        }
 
         if (!res.ok) throw new Error('Failed to decrement item');
 
@@ -145,7 +172,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error decrementing item:', err.message);
       }
     },
-    [token, baseUrl]
+    [token, baseUrl, showModal, logout, navigate]
   );
 
   const removeFromCart = useCallback(
@@ -157,6 +184,13 @@ export const CartProvider = ({ children, userId, token }) => {
             'Authorization': `Bearer ${token}`,
            },
         });
+
+        if (res.status === 401) {
+          showModal('Session expired. Please log in again.');
+          logout();
+          navigate('/login');
+          return;
+        }
 
         if (!res.ok) throw new Error('Failed to remove item');
 
@@ -171,7 +205,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error removing from cart:', err.message);
       }
     },
-    [token, baseUrl]
+    [token, baseUrl, showModal, logout, navigate]
   );
 
   return (
