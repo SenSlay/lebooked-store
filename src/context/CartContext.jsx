@@ -31,7 +31,7 @@ export const CartProvider = ({ children, userId, token }) => {
     };
 
     fetchCart();
-  }, [userId]);
+  }, [userId, token, baseUrl]);
 
   // Add book to cart
   const addToCart = useCallback(
@@ -64,7 +64,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error updating cart:', err.message);
       }
     },
-    [userId],
+    [token, baseUrl],
   );
 
   const updateCartItemQuantity = useCallback(
@@ -93,7 +93,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error updating item quantity:', err.message);
       }
     },
-    [userId]
+    [token, baseUrl]
   );
 
   const incrementCartItem = useCallback(
@@ -119,7 +119,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error incrementing item:', err.message);
       }
     },
-    [userId]
+    [token, baseUrl]
   );
 
   const decrementCartItem = useCallback(
@@ -145,7 +145,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error decrementing item:', err.message);
       }
     },
-    [userId]
+    [token, baseUrl]
   );
 
   const removeFromCart = useCallback(
@@ -171,7 +171,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error removing from cart:', err.message);
       }
     },
-    [userId]
+    [token, baseUrl]
   );
 
   return (
