@@ -49,7 +49,7 @@ export default function SearchSidebar({ isOpen, onClose }) {
                   className="flex p-2 hover:bg-gray-100 rounded-md"
                   onClick={onClose}
                 >
-                  <img src={book.image} alt="" className="w-16 h-20 mr-5" />
+                  <img src={book.imageUrl} alt="" className="w-16 h-20 mr-5" />
                   <div>
                     <p className="font-medium">{book.title}</p>
                     <p className="text-sm text-gray-500">{book.author}</p>
