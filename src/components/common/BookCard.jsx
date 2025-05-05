@@ -2,13 +2,22 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useModal } from '../../context/ModalContext';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 function BookCard({ book, page }) {
-  const { updateCartQuantity } = useCart();
+  const { addToCart } = useCart();
   const { showModal } = useModal();
+  const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
 
   const handleAddToCart = (book) => {
-    updateCartQuantity(book, 1, true);
+    if (!isLoggedIn) {
+      showModal('Please log in to add items to your cart');
+      navigate('/login');
+      return;
+    }
+    addToCart(book);
     showModal('Item added to your cart');
   };
 
