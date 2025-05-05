@@ -8,6 +8,14 @@ function ShoppingCart() {
   const [isOrderSummaryVisible, setIsOrderSummaryVisible] = useState(true);
   const orderSummaryRef = useRef(null);
 
+  const flattenedCart = useMemo(() => {
+    return cart.map(item => ({
+      ...item.book, // spread book fields (title, author, price, etc.)
+      quantity: item.quantity,
+      bookId: item.bookId,
+    }));
+  }, [cart]);
+
   useEffect(() => {
     const orderSummaryElement = orderSummaryRef.current;
 
@@ -34,8 +42,8 @@ function ShoppingCart() {
   }, []);
 
   const subtotal = useMemo(() => {
-    return cart.reduce((acc, book) => acc + book.price * book.quantity, 0);
-  }, [cart]);
+    return flattenedCart.reduce((acc, book) => acc + book.price * book.quantity, 0);
+  }, [flattenedCart]);
 
   return (
     <div className="flex-1 flex justify-center">
@@ -59,8 +67,8 @@ function ShoppingCart() {
 
             {/* Cart Items */}
             <ul className="flex flex-col gap-3">
-              {cart.length > 0 ? (
-                cart.map((book) => <CartItem key={book.id} book={book} />)
+              {flattenedCart.length > 0 ? (
+                flattenedCart.map((book) => <CartItem key={book.bookId} book={book} />)
               ) : (
                 <p className="text-center mt-4">Your cart is empty.</p>
               )}
