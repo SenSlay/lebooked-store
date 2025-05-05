@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const CartItem = ({ book }) => {
-  const { updateCartQuantity, removeFromCart } = useCart();
+  const { updateCartItemQuantity, removeFromCart, incrementCartItem, decrementCartItem } = useCart();
   const [quantity, setQuantity] = useState(book.quantity);
+  const [bookPrice, setBookPrice] = useState(book.price * book.quantity); 
 
-  // Sync cart whenever quantity changes
   useEffect(() => {
-    updateCartQuantity(book, quantity); // Update global cart state
-  }, [quantity, updateCartQuantity, book]);
+    if (quantity > 0) {
+      setBookPrice(book.price * quantity); 
+    }
+  }, [quantity, book.price]);
 
   return (
     <li
@@ -19,7 +21,7 @@ const CartItem = ({ book }) => {
       className="grid sm:grid-cols-[1fr_0.5fr_1fr_0.5fr_90px] lg:grid-cols-[2fr_0.5fr_1fr_0.5fr_90px] grid-cols-[1fr_auto] gap-4 py-4 border-b items-center"
     >
       <div className="flex items-start lg:items-center gap-3 flex-col lg:flex-row">
-        <Link to={`/books/${book.id}`}>
+        <Link to={`/books/${book.bookId}`}>
           <img
             src={book.imageUrl}
             alt={book.title}
@@ -33,7 +35,14 @@ const CartItem = ({ book }) => {
 
       <div className="flex flex-col items-center sm:items-start">
         <p className="font-medium mb-5 sm:hidden">${book.price}</p>
-        <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+        <QuantitySelector 
+          quantity={quantity} 
+          setQuantity={setQuantity}
+          onIncrement={() => incrementCartItem(book.bookId)}
+          onDecrement={() => decrementCartItem(book.bookId)}
+          onInputChange={(newQty) => updateCartItemQuantity(book.bookId, newQty)}
+          setBookPrice={setBookPrice}
+        />
         <p className="font-medium my-5 sm:hidden">
           ${(book.price * quantity).toFixed(2)}
         </p>
@@ -46,11 +55,11 @@ const CartItem = ({ book }) => {
       </div>
 
       <p className="font-medium hidden sm:block">
-        ${(book.price * quantity).toFixed(2)}
+        ${bookPrice.toFixed(2)}
       </p>
 
       <button
-        onClick={() => removeFromCart(book.id)}
+        onClick={() => window.confirm(`Are you sure you want to remove ${book.title} from your cart?`) && removeFromCart(book.id)}
         className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded hidden sm:block"
       >
         Remove
