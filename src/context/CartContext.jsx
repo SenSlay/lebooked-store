@@ -28,7 +28,6 @@ export const CartProvider = ({ children, userId, token }) => {
         if (!res.ok) throw new Error('Failed to fetch cart');
         const data = await res.json();
         setCart(data);
-        console.log('Cart loaded:', data);
       } catch (err) {
         console.error('Error loading cart:', err.message);
       } finally {
@@ -43,7 +42,6 @@ export const CartProvider = ({ children, userId, token }) => {
   const addToCart = useCallback(
     async (book) => {
       try {
-        console.log(token)
         // Add book to cart
         const res = await fetch(`${baseUrl}/cart/${book.id}`, {
           method: 'POST',
@@ -52,7 +50,6 @@ export const CartProvider = ({ children, userId, token }) => {
            },
         });
 
-        console.log('Response:', res);
         if (!res.ok) throw new Error('Failed to update cart');
         
         // Fetch updated cart
@@ -76,7 +73,6 @@ export const CartProvider = ({ children, userId, token }) => {
   const updateCartItemQuantity = useCallback(
     async (bookId, quantity) => {
       try {
-        console.log('test')
         const res = await fetch(`${baseUrl}/cart/${bookId}`, {
           method: 'PUT',
           headers: {
