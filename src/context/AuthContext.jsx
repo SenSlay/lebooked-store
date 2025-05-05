@@ -35,9 +35,6 @@ export const AuthProvider = ({ children }) => {
     setToken(token);
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('token', token);
-
-    console.log('User logged in:', userData);
-    console.log('Token:', token);
   };
 
   const logout = () => {
@@ -47,8 +44,41 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
+  const signup = async (username, password, showModal, navigate) => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+  
+      if (res.status === 401) {
+        showModal?.('Session expired. Please log in again.');
+        logout();
+        navigate?.('/login');
+        return;
+      }
+  
+      if (!res.ok) {
+        const errorData = await res.json();
+        showModal?.(errorData?.error || 'Signup failed.');
+        return;
+      }
+  
+      const data = await res.json();
+      login(data.user, data.token);
+      showModal?.('Signup successful!');
+      navigate?.('/');
+    } catch (err) {
+      console.error('Signup error:', err.message);
+      showModal?.('An unexpected error occurred.');
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, isLoggedIn: !!user && !!token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, isLoggedIn: !!user && !!token, login, logout, signup }}>
       {children}
     </AuthContext.Provider>
   );
