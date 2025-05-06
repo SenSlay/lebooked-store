@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // adjust if your path differs
+import { useAuth } from '../context/AuthContext'; 
+import { useModal } from '../context/ModalContext';
 
-function Signup({ showModal }) {
+function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { signup } = useAuth();
+  const { showModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,9 +33,11 @@ function Signup({ showModal }) {
     // Signup and handle errors
     try {
       await signup(username, password, showModal, navigate);
+      showModal('Signup successful!');
+      navigate('/');
     } catch (err) {
-      if (err.message.includes('401') || err.message.includes('Invalid')) {
-        setError('Incorrect username or password');
+      if (err.message.includes('400') || err.message.includes('exists')) {
+        setError('That username already exists. Please choose another one.');
       } else {
         setError('Something went wrong. Please try again.');
       }
