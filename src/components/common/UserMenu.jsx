@@ -1,9 +1,9 @@
-import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '../../context/AuthContext'; 
+import PropTypes from 'prop-types';
 
 const UserMenu = ({ username }) => {
-  const { logout } = useAuth();
+  const { logout } = useAuth(); 
   const navigate = useNavigate();
 
   return (
@@ -41,6 +41,10 @@ const UserMenu = ({ username }) => {
       </div>
     </div>
   );
+};
+
+UserMenu.propTypes = {
+  username: PropTypes.string.isRequired,
 };
 
 export default UserMenu;
