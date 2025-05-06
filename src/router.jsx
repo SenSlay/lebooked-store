@@ -7,6 +7,7 @@ import ErrorPage from './pages/ErrorPage';
 import BookDetails from './pages/BookDetails';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import PublicRoute from './components/router/PublicRoute';
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,18 @@ const router = createBrowserRouter([
       { path: '/books', element: <Books /> },
       { path: '/cart', element: <ShoppingCart /> },
       { path: '/books/:id', element: <BookDetails /> },
-      { path: '/login', element: <Login /> },
-      { path: '/signup', element: <Signup /> }
+      { path: '/login', element: (
+        <PublicRoute>
+          <Login />
+        </PublicRoute>
+        ),
+      },
+      { path: '/signup', element: (
+        <PublicRoute>
+          <Signup />
+        </PublicRoute>
+        ),
+      }
     ],
   },
 ]);
