@@ -72,13 +72,13 @@ function Header() {
                 to='/signup'
                 className="flex gap-2 hover:underline underline-offset-8"
                 >
-                  <span className="hidden lg:inline">Signup</span>
+                  <span>Signup</span>
                 </Link>
                 <Link
                 to="/login"
                 className="flex gap-2 hover:underline underline-offset-8"
                 >
-                  <span className="hidden lg:inline">Login</span>
+                  <span>Login</span>
                 </Link>
               </>
             )}
