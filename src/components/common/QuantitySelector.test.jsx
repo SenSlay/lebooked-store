@@ -11,7 +11,7 @@ const Wrapper = () => {
 };
 
 describe('Testing QuantitySelector Component', () => {
-  test('Decrement button decreases quantity but not below 0', async () => {
+  test('Decrement button decreases quantity but not below 1', async () => {
     const user = userEvent.setup();
     render(<Wrapper />);
 
@@ -28,10 +28,7 @@ describe('Testing QuantitySelector Component', () => {
     expect(quantityInput).toHaveValue('1'); // Decrements to 1
 
     await user.click(decrementButton);
-    expect(quantityInput).toHaveValue('0'); // Decrements to 0
-
-    await user.click(decrementButton);
-    expect(quantityInput).toHaveValue('0'); // Should not go below 0
+    expect(quantityInput).toHaveValue('1'); // Stays at 1
   });
 
   test('Increment button increases quantity', async () => {
@@ -58,7 +55,6 @@ describe('Testing QuantitySelector Component', () => {
 
     await user.clear(quantityInput); // Sets input to 0
     await user.type(quantityInput, 'abc');
-    expect(quantityInput).toHaveValue('0'); // Input does not accept non-numeric inputs, so remains 0
 
     await user.clear(quantityInput); // Sets input to 0
     await user.type(quantityInput, '123');

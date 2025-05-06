@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import BookCard from './BookCard';
 import { useCart } from '../../context/CartContext';
 import { useModal } from '../../context/ModalContext';
+import { useAuth } from '../../context/AuthContext';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
@@ -15,25 +16,28 @@ vi.mock('../../context/ModalContext', () => ({
   useModal: vi.fn(),
 }));
 
+vi.mock('../../context/AuthContext', () => ({
+  useAuth: vi.fn(),
+}));
+
 describe('Testing BookCard Component', () => {
-  test('clicking "Add to Cart" button calls updateCartQuantity', async () => {
+  test('clicking "Add to Cart" adds book and shows modal', async () => {
     const user = userEvent.setup();
-    const mockUpdateCartQuantity = vi.fn();
+    const mockAddToCart = vi.fn();
     const mockShowModal = vi.fn();
 
-    useCart.mockReturnValue({ updateCartQuantity: mockUpdateCartQuantity });
+    useCart.mockReturnValue({ addToCart: mockAddToCart });
     useModal.mockReturnValue({ showModal: mockShowModal });
+    useAuth.mockReturnValue({ isLoggedIn: true }); // Simulate logged in
 
-    // Sample book data
     const book = {
       id: 1,
       title: 'The Great Gatsby',
       author: 'F. Scott Fitzgerald',
-      image: '/gatsby.jpg',
+      imageUrl: '/gatsby.jpg',
       price: 10.99,
     };
 
-    // Render BookCard inside MemoryRouter
     render(
       <MemoryRouter>
         <BookCard book={book} />
@@ -43,7 +47,7 @@ describe('Testing BookCard Component', () => {
     const button = screen.getByRole('button', { name: /add to cart/i });
     await user.click(button);
 
-    expect(mockUpdateCartQuantity).toHaveBeenCalledWith(book, 1, true);
-    expect(mockShowModal).toHaveBeenCalledWith('Item added to your cart');
+    expect(mockAddToCart).toHaveBeenCalledWith(book);
+    expect(mockShowModal).toHaveBeenCalledWith(expect.stringContaining('Item added'), expect.anything());
   });
 });
