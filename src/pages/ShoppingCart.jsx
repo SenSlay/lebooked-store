@@ -2,11 +2,17 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CartItem from '../components/shoppingCartPage/CartItem';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useModal } from '../context/ModalContext';
+import { useNavigate } from 'react-router-dom';
 
 function ShoppingCart() {
   const { cart } = useCart();
   const [isOrderSummaryVisible, setIsOrderSummaryVisible] = useState(true);
   const orderSummaryRef = useRef(null);
+  const { isLoggedIn } = useAuth();
+  const { showModal } = useModal();
+  const navigate = useNavigate();
 
   const flattenedCart = useMemo(() => {
     return cart.map(item => ({
@@ -15,6 +21,18 @@ function ShoppingCart() {
       bookId: item.bookId,
     }));
   }, [cart]);
+
+  const handleCheckout = () => {
+    if (!isLoggedIn) {
+      showModal('Please log in to proceed to checkout.');
+      navigate('/login');
+      return;
+    } else if (flattenedCart.length === 0) {
+      alert('Your cart is empty.');
+      return;
+    }
+    alert('Checkout successful yehey?')
+  };
 
   useEffect(() => {
     const orderSummaryElement = orderSummaryRef.current;
@@ -94,12 +112,13 @@ function ShoppingCart() {
               Shipping and taxes computed at checkout
             </p>
             <button
-              className="bg-blue-600 text-white p-2 rounded mb-5 hover:bg-blue-700"
-              onClick={() => alert('Checkout successful yehey?')}
+              className={`bg-blue-600 text-white p-2 rounded mb-5 hover:bg-blue-700 ${flattenedCart === 0 ? 'cursor-pointer' : 'cursor-default'}`}
+              onClick={handleCheckout}
+              disabled={flattenedCart.length === 0}
             >
               Checkout
             </button>
-            <Link to="/books" className="underline text-right">
+            <Link to="/books" className="underline text-right ml-auto">
               Continue Shopping
             </Link>
           </div>
