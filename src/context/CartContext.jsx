@@ -11,12 +11,15 @@ export const CartProvider = ({ children, userId, token }) => {
   const [loading, setLoading] = useState(true);
   const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
   const { showModal } = useModal();
-  const { logout } = useAuth();
+  const { logout, isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   // Load cart on mount
   useEffect(() => {
-    if (!userId) return;
+    if (!isLoggedIn) {
+      setCart([]);
+      return;
+    }
 
     const fetchCart = async () => {
       try {
@@ -36,7 +39,7 @@ export const CartProvider = ({ children, userId, token }) => {
     };
 
     fetchCart();
-  }, [userId, token, baseUrl]);
+  }, [userId, token, baseUrl, isLoggedIn]);
 
   // Add book to cart
   const addToCart = useCallback(
@@ -49,6 +52,14 @@ export const CartProvider = ({ children, userId, token }) => {
             'Authorization': `Bearer ${token}`,
            },
         });
+
+        if (res.status === 401) {
+          logout();
+          showModal('Session expired. Please log in again.');
+          setCart([]);
+          navigate('/login');
+          return;
+        }
 
         if (!res.ok) throw new Error('Failed to update cart');
         
@@ -67,7 +78,7 @@ export const CartProvider = ({ children, userId, token }) => {
         console.error('Error updating cart:', err.message);
       }
     },
-    [token, baseUrl],
+    [token, baseUrl, showModal, logout, navigate],
   );
 
   const updateCartItemQuantity = useCallback(
@@ -85,6 +96,7 @@ export const CartProvider = ({ children, userId, token }) => {
         if (res.status === 401) {
           showModal('Session expired. Please log in again.');
           logout();
+          setCart([]);
           navigate('/login');
           return;
         }
@@ -118,6 +130,7 @@ export const CartProvider = ({ children, userId, token }) => {
         if (res.status === 401) {
           showModal('Session expired. Please log in again.');
           logout();
+          setCart([]);
           navigate('/login');
           return;
         }
@@ -151,6 +164,7 @@ export const CartProvider = ({ children, userId, token }) => {
         if (res.status === 401) {
           showModal('Session expired. Please log in again.');
           logout();
+          setCart([]);
           navigate('/login');
           return;
         }
@@ -184,6 +198,7 @@ export const CartProvider = ({ children, userId, token }) => {
         if (res.status === 401) {
           showModal('Session expired. Please log in again.');
           logout();
+          setCart([]);
           navigate('/login');
           return;
         }
