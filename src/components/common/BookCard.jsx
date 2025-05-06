@@ -41,7 +41,7 @@ function BookCard({ book, page }) {
           ${page === 'books' ? 'min-w-[170px] lg:min-w-[200px]' : 'w-[200px] lg:w-[241px]'}`}
       >
         <img
-          src={book.imageUrl}
+          src={book.imageUrl === "/placeholder.jpg" ? "/images/placeholder.jpg" : book.imageUrl}
           alt="Book"
           className="bg-white w-[170px] h-[250px] self-center mb-2"
         />
