@@ -5,6 +5,7 @@ import { BooksProvider } from './context/BooksContext';
 import { CartProvider } from './context/CartContext';
 import { ModalProvider } from './context/ModalContext';
 import { useAuth } from './context/AuthContext';
+import ChatWidget from './components/chat/ChatWidget';
 
 function App() {
   const { user, token } = useAuth();
@@ -18,6 +19,7 @@ function App() {
             <main className="flex-1 flex-grow flex flex-col">
               <Outlet />
             </main>
+            <ChatWidget />
           </BooksProvider>
         </CartProvider>
       </ModalProvider>
