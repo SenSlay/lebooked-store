@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { useBooksContext } from "../../context/BooksContext";
 import MessageBubble from "./MessageBubble";
 
@@ -11,6 +10,11 @@ function ChatWidget() {
   const { books } = useBooksContext();
   const [errorMessage, setErrorMessage] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [displayMessages, isOpen]); // scroll when messages update
 
   async function handleSend() {
     const trimmedInput = input.trim();
@@ -107,6 +111,7 @@ function ChatWidget() {
                 isTyping={true} 
               />
             )}
+            <div ref={bottomRef} />
           </div>
 
           <div className="flex p-2 bg-white rounded-b-xl">
