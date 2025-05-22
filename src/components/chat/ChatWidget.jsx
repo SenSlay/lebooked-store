@@ -120,6 +120,7 @@ function ChatWidget() {
               <input
                 value={input}
                 onChange={e => setInput(e.target.value)}
+                maxLength={300}
                 className="p-2 rounded flex-1 outline-none"
                 placeholder="Ask for a book..."
               />
