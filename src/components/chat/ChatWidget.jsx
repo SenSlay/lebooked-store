@@ -36,7 +36,7 @@ function ChatWidget() {
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       
       const { response } = await res.json();
-      const parsedContent = JSON.parse(response.content);
+      const parsedContent = safeExtractJSON(response.content);
 
       const assistantMessage = {
         role: 'assistant',
@@ -89,7 +89,7 @@ function ChatWidget() {
           </div>
 
           {/* Messages */}
-          <div className="messages overflow-y-auto h-96 mb-2 p-4">
+          <div className="messages overflow-y-auto h-96 mb-2 p-4 flex flex-col">
            <MessageBubble role="assistant" content="Hello, welcome to LeBooked! How can I help you?" />
             {displayMessages.map((msg, i) => (
               <MessageBubble
@@ -149,6 +149,24 @@ function getBookObjectsByTitle(titles, allBooks) {
       )
     )
     .filter(Boolean); // remove nulls (if no match found)
+}
+
+function safeExtractJSON(responseText) {
+  const firstBrace = responseText.indexOf('{');
+  const lastBrace = responseText.lastIndexOf('}');
+
+  if (firstBrace === -1 || lastBrace === -1 || lastBrace <= firstBrace) {
+    throw new Error('No valid JSON object found in the response');
+  }
+
+  const jsonSubstring = responseText.slice(firstBrace, lastBrace + 1);
+
+  try {
+    return JSON.parse(jsonSubstring);
+  } catch (err) {
+    console.error('Failed to parse extracted JSON:', err);
+    throw new Error('Response format is invalid');
+  }
 }
 
 export default ChatWidget;
