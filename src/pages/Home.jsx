@@ -36,7 +36,7 @@ function Home() {
       </div>
       <HomeSection title="Popular Categories">
         <PopularCategories
-          titles={['Self Help', 'Romance', 'Science Fiction', 'Classic']}
+          titles={['Self Help', 'Romance', 'Fiction', 'Young Adult']}
         ></PopularCategories>
       </HomeSection>
 
