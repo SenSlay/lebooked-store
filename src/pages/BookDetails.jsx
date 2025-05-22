@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useModal } from '../context/ModalContext';
 import { useNavigate } from 'react-router-dom';
 import { useBooksContext } from '../context/BooksContext';
+import { useAuth } from '../context/AuthContext';
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const BookDetails = () => {
   const { showModal } = useModal();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
 
   const book = books.find((b) => b.id.toString() === id);
 
@@ -24,6 +26,12 @@ const BookDetails = () => {
   const existingCartItem = cart.find((item) => item.bookId === book.id);
   
   const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      showModal('Please log in to add items to your cart');
+      navigate('/login');
+      return;
+    }
+
     if (!quantity || quantity < 1) {
       setError('Quantity must be at least 1.');
       return;
@@ -52,6 +60,12 @@ const BookDetails = () => {
   };
 
   const handleBuyNow = () => {
+     if (!isLoggedIn) {
+      showModal('Please log in to buy items');
+      navigate('/login');
+      return;
+    } 
+
     if (!quantity || quantity < 1) {
       setError('Quantity must be at least 1.');
       return;
@@ -76,7 +90,7 @@ const BookDetails = () => {
       <div className="flex-1 flex flex-col lg:flex-row justify-center items-center max-w-7xl lg:gap-20 p-5 lg:p-12">
         <div>
           <img
-            src={book.imageUrl}
+            src={book.imageUrl === "/placeholder.jpg" ? "/images/placeholder.jpg" : book.imageUrl}
             alt={book.title}
             className="h-80 lg:h-96 object-cover"
           />
