@@ -16,3 +16,4 @@ A mock online bookstore web application where users can browse books, view detai
 - **Tailwind CSS** – Implementing a modern, responsive UI with utility classes.
 - **React Router** – Enabling seamless navigation between pages.
 - **PropType Checking** – Ensuring type safety in React components.
+- **AI Chatbot Integration** – Implemented a dynamic AI assistant using LLaMA via OpenRouter API.
