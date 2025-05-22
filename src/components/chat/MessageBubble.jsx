@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function MessageBubble({ role, content, books = [], isTyping = false }) {
   const isUser = role === 'user';
@@ -18,25 +19,27 @@ function MessageBubble({ role, content, books = [], isTyping = false }) {
             </svg>
           </div>
         )}
-        <p className={`px-4 py-2 rounded-2xl shadow text-sm max-w-[80%] ${isUser ? 'bg-blue-500 text-white rounded-br-sm' : 'bg-white text-black rounded-bl-sm'}`}>
+        <div className={`px-4 py-2 rounded-2xl shadow text-sm max-w-[80%] ${isUser ? 'bg-blue-500 text-white rounded-br-sm' : 'bg-white text-black rounded-bl-sm'}`}>
           {isTyping ? (
             <TypingDots />
           ) : (
             content
           )}
-        </p>
+        </div>
       </div>
 
       {/* Recommended books for assistant */}
       {!isUser && books?.length > 0 && (
-        <ul className="mt-2 text-xs text-gray-700 list-disc pl-6">
+        <ul className="flex flex-col gap-2 mt-2">
           {books.map((book, idx) => (
-            <li key={idx}>
-              <Link to={`/books/${book.id}`} className="text-blue-600 underline">
-                {book.title}
-              </Link>
-              {book.author && ` by ${book.author}`}
-            </li>
+            <Link
+              key={idx}
+              to={`/books/${book.id}`}
+              className="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition flex items-center"
+            >
+              <p className="text-sm font-semibold mr-1 text-blue-700 truncate max-w-48" title={book.title}>{book.title}</p>
+              {book.author && <p className="text-xs text-gray-500">by {book.author}</p>}
+            </Link>
           ))}
         </ul>
       )}
