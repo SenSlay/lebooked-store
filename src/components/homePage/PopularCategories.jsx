@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const categoryImages = {
   'Self Help': '../images/category/self-help_category.png',
   Romance: '../images/category/romance_category.png',
-  'Science Fiction': '../images/category/science-fiction_category.png',
-  Classic: '../images/category/classics_category.png',
+  'Fiction': '../images/category/science-fiction_category.png',
+  'Young Adult': '../images/category/classics_category.png',
 };
 
 function PopularCategories({ titles }) {
